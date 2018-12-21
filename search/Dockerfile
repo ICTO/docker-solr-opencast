@@ -22,7 +22,7 @@ RUN curl -O "${solr}" \
 && mkdir -p /var/lib/solr/data
 
 # Install nfsutils
-RUN apt-get install nfs-utils
+RUN apt-get install nfs-common
 
 # Copy opencast specific configuration and libraries
 COPY assets/solr /usr/local/tomcat/solr
