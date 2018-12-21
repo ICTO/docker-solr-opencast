@@ -10,9 +10,10 @@ LABEL maintainer="MultimediaUGent <multimedia@ugent.be>" \
        org.label-schema.vcs-url="https://github.com/ICTO/docker-solr-opencast" \
        org.label-schema.vendor="Ghent University" \
        org.label-schema.docker.debug="docker exec -it $CONTAINER sh"
-       
+
 ARG solr="http://archive.apache.org/dist/lucene/solr/1.4.1/apache-solr-1.4.1.zip"
 
+# Install SOLR as tomcat webapp
 RUN curl -O "${solr}" \
 && unzip apache-solr-1.4.1.zip \
 && unzip apache-solr-1.4.1/example/webapps/solr.war -d /usr/local/tomcat/webapps/solr/ \
@@ -20,5 +21,9 @@ RUN curl -O "${solr}" \
 && rm -r apache-solr-1.4.1 \
 && mkdir -p /var/lib/solr/data
 
+# Install nfsutils
+RUN apt-get install nfs-utils
+
+# Copy opencast specific configuration and libraries
 COPY assets/solr /usr/local/tomcat/solr
 COPY assets/opencast-solr-5.1.jar /usr/local/tomcat/webapps/solr/WEB-INF/lib
