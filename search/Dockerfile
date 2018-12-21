@@ -21,10 +21,6 @@ RUN curl -O "${solr}" \
 && rm -r apache-solr-1.4.1 \
 && mkdir -p /var/lib/solr/data
 
-# Install nfsutils
-RUN apt-get update \
-&& apt-get install -y nfs-common
-
 # Copy opencast specific configuration and libraries
 COPY assets/solr /usr/local/tomcat/solr
 COPY assets/opencast-solr-5.1.jar /usr/local/tomcat/webapps/solr/WEB-INF/lib

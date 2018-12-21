@@ -13,6 +13,7 @@ LABEL maintainer="MultimediaUGent <multimedia@ugent.be>" \
 
 ARG solr="http://archive.apache.org/dist/lucene/solr/1.4.1/apache-solr-1.4.1.zip"
 
+# Install SOLR as tomcat webapp
 RUN curl -O "${solr}" \
 && unzip apache-solr-1.4.1.zip \
 && unzip apache-solr-1.4.1/example/webapps/solr.war -d /usr/local/tomcat/webapps/solr/ \
@@ -20,5 +21,6 @@ RUN curl -O "${solr}" \
 && rm -r apache-solr-1.4.1 \
 && mkdir -p /var/lib/solr/data
 
+# Copy opencast specific config and library
 COPY assets/solr /usr/local/tomcat/solr
 COPY assets/opencast-solr-5.1.jar /usr/local/tomcat/webapps/solr/WEB-INF/lib
