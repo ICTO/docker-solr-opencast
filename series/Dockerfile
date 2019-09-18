@@ -24,3 +24,4 @@ RUN curl -O "${solr}" \
 # Copy opencast specific config and library
 COPY assets/solr /usr/local/tomcat/solr
 COPY assets/opencast-solr-5.1.jar /usr/local/tomcat/webapps/solr/WEB-INF/lib
+COPY assets/server.xml /usr/local/tomcat/conf/server.xml
